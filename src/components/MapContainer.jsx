@@ -1,41 +1,44 @@
 import React, { Component } from 'react';
-import {Map, Circle, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { withScriptjs, withGoogleMap, GoogleMap, Circle } from "react-google-maps";
 
-export class MapContainer extends Component {
-    render() {
-    
-      return (
-        <Map 
-        
-          google={this.props.google} 
-          zoom={16}
-          initialCenter={{
-            lat: 51.469540,
-            lng: -2.564120
-          }}
-          onClick={this.onMapClicked}
-        >
-   
-        <Marker
-          title={'The marker`s title will appear as a tooltip.'}
-          name={'SOMA'}
-          position={{lat: 51.469540, lng: -2.564120}} />
-   
-      
+function Map() {
+  return (
+    <GoogleMap 
+    defaultZoom={14.5}
+    defaultCenter={{lat: 51.469540, lng: -2.564120}}>
 
-<InfoWindow onClose={this.onInfoWindowClose}>
-              <div>
-                <h1>Hello</h1>
-              </div>
-          </InfoWindow>
-      
-       
-        </Map>
-        
-      );
-    }
-  }
-   
-  export default GoogleApiWrapper({
-    apiKey: ('AIzaSyArMRSq9rYUkcCnY2ZTlyPjf8zEPHmpP9Y')
-  })(MapContainer)
+                  <Circle
+                  defaultCenter={{
+                    lat: 51.469540,
+                    lng: -2.564120
+                  }}
+                  radius={1609}
+
+                  options = {{
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillOpacity: 0,
+                  }}
+                  
+                  
+                />
+    </GoogleMap>
+  );
+}
+
+const WrappedMap = withScriptjs(withGoogleMap(Map))
+ 
+export default function MapContainer() {
+  return (
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <WrappedMap
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyArMRSq9rYUkcCnY2ZTlyPjf8zEPHmpP9Y`}
+      loadingElement={<div style={{ height: `100%` }} />}
+      containerElement={<div style={{ height: `100%` }} />}
+      mapElement={<div style={{ height: `100%` }} />}
+      />
+    </div>
+  )
+}
+
