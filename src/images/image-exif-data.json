@@ -1,0 +1,32 @@
+{ "data": [    {
+        "name": "IMG_0739.JPG",
+        "latitude": "51.468778",
+        "longitude": "-2.575386"
+    },
+    {
+        "name": "IMG_0741.JPG",
+        "latitude": "51.468911",
+        "longitude": "-2.572831"
+    },
+    {
+        "name": "IMG_0748.JPG",
+        "latitude": "51.467994",
+        "longitude": "-2.563603"
+    },
+    {
+        "name": "IMG_0746.JPG",
+        "latitude": "51.468067",
+        "longitude": "-2.567606"
+    },
+    {
+        "name": "IMG_0599.JPG",
+        "latitude": "51.477264",
+        "longitude": "-2.549883"
+    },
+    {
+        "name": "IMG_0747.JPG",
+        "latitude": "51.467986",
+        "longitude": "-2.567597"
+    }
+]
+}

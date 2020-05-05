@@ -1,44 +1,8 @@
-import React, { Component } from 'react';
-// import * as exifData from './data.json'
+import React, { Component } from 'react'; 
+import * as exifData from '../images/image-exif-data.json' 
 import { withScriptjs, withGoogleMap, GoogleMap, Circle, Marker, MarkerWithLabel, InfoWindow } from "react-google-maps";
 
-const exifData = [{
-  "id": "1",
-  "name": "IMG_0741.JPG",
-  "latitude": 51.28808,
-  "longitude": -2.342219
-},
-{
-  "id": "2",
-  "name": "IMG_0739.JPG",
-  "latitude": 51.2876,
-  "longitude": -2.343139
-},
-{"id": "3",
-  "name": "IMG_0748.JPG",
-  "latitude": 51.28478,
-  "longitude": -2.334897
-},
-{"id": "4",
-  "name": "IMG_0746.JPG",
-  "latitude": 51.28504,
-  "longitude": -2.34338
-},
-{"id": "5",
-  "name": "IMG_0747.JPG",
-  "latitude": 51.28475,
-  "longitude": -2.34335
-},
-{"id": "6",
-  "name": "IMG_0599.JPG",
-  "latitude": 51.283815,
-  "longitude": -2.325958
-},
-{"id": "8",
-  "name": "IMG_0599.JPG",
-  "latitude": 51.283815,
-  "longitude": -2.325958
-}]
+// console.log(exifData[0].name)
 
 function Map() {
 
@@ -67,10 +31,10 @@ function Map() {
 
     />
 
-      {exifData.map((data) => (
+      {exifData.data.map((data) => (
         <Marker 
-        key={data.id}
-        position = {{lat: data.latitude, lng: data.longitude}}
+        // key={data.id}
+        position = {{lat: Number(data.latitude), lng: Number(data.longitude)}}
         />
       ))}
     
