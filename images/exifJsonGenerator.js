@@ -5,35 +5,37 @@ const directoryPath = path.join(__dirname, './');
 
 const returnExifData = (fileName) => {
     try {
-        // const myObj = {}
         new ExifImage({ image : fileName }, function (error, exifData) {
             if (error)
                 console.log('Error: '+ error.message);
             else
-                console.log({name: fileName, latitude : exifData.gps.GPSLatitude, longitude : exifData.gps.GPSLongitude})
+                return {name: fileName, latitude : exifData.gps.GPSLatitude, longitude : exifData.gps.GPSLongitude}
+                // console.log({name: fileName, latitude : exifData.gps.GPSLatitude, longitude : exifData.gps.GPSLongitude}) 
         });
     } catch (error) {
         console.log('Error: ' + error.message);
     }
 }
 
-fs.readdir(directoryPath, function (err, files) {
-    // let exifData = [];
-    if (err) {
-        return console.log('Unable to scan directory: ' + err);
-    } 
-    files.forEach(function (file) {
-        if (path.extname(file) === '.JPG'){
-            // exifData.push(returnExifData(file)) 
-            // console.log(returnExifData(file))
-            console.log(returnExifData(file))
-        }
-    });
-    // console.log(exifData)
-})
+console.log(returnExifData('IMG_0599.JPG'));
+
+// fs.readdir(directoryPath, function (err, files) {
+//     if (err) {
+//         return console.log('Unable to scan directory: ' + err);
+//     } 
+//     files.forEach(function (file) {
+//         if (path.extname(file) === '.JPG'){
+//             // exifData.push(returnExifData(file)) 
+//             // console.log(returnExifData(file))
+//             console.log(returnExifData(file))
+//         }
+//     });
+// })
 
 
-returnExifData('IMG_0599.JPG') 
+console.log(returnExifData('IMG_0599.JPG'));
+
+
 
 
 
