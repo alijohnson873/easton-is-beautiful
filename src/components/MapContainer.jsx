@@ -1,43 +1,53 @@
-import React, { Component } from 'react'; 
+import React, { Component, useState } from 'react'; 
 import * as exifData from '../images/image-exif-data.json' 
-import { withScriptjs, withGoogleMap, GoogleMap, Circle, Marker, MarkerWithLabel, InfoWindow } from "react-google-maps";
-
-// console.log(exifData[0].name)
+import { withScriptjs, withGoogleMap, GoogleMap, Circle, Marker, MarkerWithLabel, InfoWindow, MarkerClusterer  } from "react-google-maps";
+import './MapContainer.css'
 
 function Map() {
-
-  console.log(exifData)
+  const [selectedPhoto, setSelectedPhoto] = useState(null)
 
   return (
     <GoogleMap 
-    defaultZoom={14.5}
+    defaultZoom={14.9}
     defaultCenter={{lat: 51.469540, lng: -2.564120}}>
-    <Circle
+     
+       <Circle
       defaultCenter={{lat: 51.469540,lng: -2.564120}}
       radius={1609}
-      // radius={2000}
       options = {{
-        strokeColor: '#FF0000',
+        strokeColor: 'green',
         strokeOpacity: 0.8,
-        strokeWeight: 2,
+        strokeWeight: 5,
         fillOpacity: 0,
       }}          
-              />
-    <Marker
-      position = {{lat: 51.469540, lng: -2.564120}}
-      onClick={() => {
-        console.log('hello')
-      }}
-
-    />
-
-      {exifData.data.map((data) => (
+     />
+      {exifData.data.map((photo) => (
         <Marker 
-        // key={data.id}
-        position = {{lat: Number(data.latitude), lng: Number(data.longitude)}}
+        position = {{lat: Number(photo.latitude), lng: Number(photo.longitude)}}
+        onClick = {() => {
+          setSelectedPhoto(photo)
+        }}
+        // icon = {{
+        //   url: '/location-pin-camera--512.png',
+        //   scaledSize: new window.google.maps.Size(25,25)
+        // }}
         />
       ))}
-    
+       {selectedPhoto && (
+           <InfoWindow 
+           position = {{lat: Number(selectedPhoto.latitude), lng: Number(selectedPhoto.longitude)}}
+           onCloseClick = {() => {
+            setSelectedPhoto(null)
+          }}
+
+          // content = '<img src="../images/IMG_0739.JPG"></img>'
+           > 
+
+           <div id="image-container">
+           <img src={require(`../images/${selectedPhoto.name}`)} />
+           </div>
+           </InfoWindow>
+       )}
 
     </GoogleMap>
   );

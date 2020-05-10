@@ -1,8 +1,8 @@
 const ExifImage = require('exif').ExifImage;
 const path = require('path');
 const fs = require('fs');
-const directoryPath = path.join(__dirname, './');
-let dataArray = []; 
+const directoryPath = path.join(__dirname, '../images');
+let dataArray = {data:[]}; 
 
 const dmsToDD = (dmsArray, direction) => {
     let dd = dmsArray[0] + dmsArray[1]/60 + dmsArray[2]/(60*60);
@@ -18,7 +18,7 @@ const returnExifData = (fileName) => {
             if (error)
                 console.log('Error: '+ error.message);
             else
-            dataArray.push({
+            dataArray.data.push({
                     name: fileName, 
                     latitude : dmsToDD(exifData.gps.GPSLatitude, exifData.gps.GPSLatitudeRef), 
                     longitude : dmsToDD(exifData.gps.GPSLongitude, exifData.gps.GPSLongitudeRef)
@@ -46,6 +46,6 @@ returnExifDataForAllFiles()
 
 setTimeout( function() {
     let jsonData = JSON.stringify(dataArray);
-    fs.writeFileSync('../image-exif-data.json', jsonData);
+    fs.writeFileSync('./image-exif-data.json', jsonData);
 }, 3000)
 
